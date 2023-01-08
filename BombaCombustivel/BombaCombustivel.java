@@ -3,36 +3,46 @@ package BombaCombustivel;
 import java.util.Scanner;
 
 public class BombaCombustivel {
+
     Scanner sc = new Scanner(System.in);
-    
+
     private int tipoCombustivel;
     private float valorLitro = 0.00f;
     private float quantCombustivel = 300.00f;
     private float valorTotal;
     private float quantCombAbastecido;
-    
+
     public BombaCombustivel(int tipoCombustivel, float valorLitro) {
         this.setTipoCombustivel(tipoCombustivel);
         this.setValorLitro(valorLitro);
-        
     }
-    
-    public void abastecerPorValor(){
+
+    public void abastecerPorValor() {
         System.out.println("Informe o valor total a abastecer:");
-        this.valorTotal = (float) sc.nextDouble();       
+        this.valorTotal = (float) sc.nextDouble();
         this.quantCombAbastecido = (float) (valorTotal / valorLitro);
-        this.quantCombustivel -= quantCombAbastecido;
-        System.out.println("Quantidade de litros abastecido: " + quantCombAbastecido);
+
+        if (quantCombustivel < quantCombAbastecido) {
+            System.out.println("Quantidade insuficiente de combustível na bomba");
+        } else {
+            this.quantCombustivel -= quantCombAbastecido;
+            System.out.println("Quantidade de litros abastecido: " + quantCombAbastecido);
+        }
     }
-    
-    public void abastecerPorLitro(){
+
+    public void abastecerPorLitro() {
         System.out.println("Informe a quantidade de litros a abastecer:");
         this.setQuantCombAbastecido((float) sc.nextDouble());
-        this.quantCombustivel -= quantCombAbastecido;
-        this.valorTotal =  quantCombAbastecido * valorLitro;
-        System.out.println( "Valor total a pagar: " + valorTotal);
+        
+        if (quantCombustivel < quantCombAbastecido) {
+            System.out.println("Quantidade insuficiente de combustível na bomba");
+        } else {
+            this.quantCombustivel -= quantCombAbastecido;
+            this.valorTotal = quantCombAbastecido * valorLitro;
+            System.out.println("Valor total a pagar: " + valorTotal);
+        }
     }
-    
+
     public String alterarCombustivel() {
         System.out.println("Informe o tipo de combustível:");
         this.setTipoCombustivel(sc.nextInt());
@@ -41,7 +51,7 @@ public class BombaCombustivel {
                 System.out.println("Álcool");
                 break;
             case 2:
-                System.out.println( "Diesel");
+                System.out.println("Diesel");
                 break;
             case 3:
                 System.out.println("Gasolina");
@@ -49,23 +59,28 @@ public class BombaCombustivel {
             default:
                 System.out.println("Opção inválida, informe novamente:");
                 this.setTipoCombustivel(sc.nextInt());
-                break;
         }
         return null;
     }
-    
+
     public float alterarValor() {
         System.out.println("Informe o valor do litro:");
         this.setValorLitro((float) sc.nextDouble());
         return valorLitro;
     }
-    
-    public void mostrarDados(){
-        System.out.println("Combustível atual: " + tipoCombustivel);
+
+    public void mostrarDados() {
+        if (tipoCombustivel == 1) {
+            System.out.println("Combustível atual: Álcool");
+        } else if (tipoCombustivel == 2) {
+            System.out.println("Combustível atual: Diesel");
+        } else if (tipoCombustivel == 3) {
+            System.out.println("Combustível atual: Gasolina");
+        }
         System.out.println("Valor por litro: " + valorLitro);
         System.out.println("Quantidade de combustível na bomba: " + quantCombustivel);
     }
-    
+
     public void alterarQuantidade() {
         System.out.println("Informe a quantidade de combustível da bomba:");
         this.setQuantCombustivel((float) sc.nextDouble());
@@ -111,4 +126,5 @@ public class BombaCombustivel {
     public void setQuantCombustivel(float quantCombustivel) {
         this.quantCombustivel = quantCombustivel;
     }
+
 }

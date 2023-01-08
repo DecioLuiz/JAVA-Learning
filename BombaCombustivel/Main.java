@@ -10,18 +10,32 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         BombaCombustivel novaBomba = new BombaCombustivel(0, 0.00f);
-        
         System.out.println("Informe o tipo de combustível:");
         System.out.println("1 - Álcool");
         System.out.println("2 - Diesel");
         System.out.println("3 - Gasolina");
+
         novaBomba.setTipoCombustivel(sc.nextInt());
+        
+        while (novaBomba.getTipoCombustivel() <= 0 || novaBomba.getTipoCombustivel() > 3) {
+            if (novaBomba.getTipoCombustivel() == 1) {
+                    System.out.println("Combustível escolhido: Álcool");
+            } else if (novaBomba.getTipoCombustivel() == 2) {
+                    System.out.println("Combustível escolhido: Diesel");
+            } else if (novaBomba.getTipoCombustivel() == 3) {
+                    System.out.println("Combustível escolhido: Gasolina");
+            } else {
+                    System.out.println("Opção errada, escolha novamente");
+            }
+            novaBomba.setTipoCombustivel(sc.nextInt());
+        }
+
+        System.out.println();
         System.out.println("Informe o valor do litro:");
         novaBomba.setValorLitro((float) sc.nextDouble()) ;
-        System.out.println("Informe a quantidade de combustível (litros) total da bomba:");
-        novaBomba.setQuantCombustivel((float) sc.nextDouble());
                 
-        
+        System.out.println();
+
         System.out.println("Opções:");
         System.out.println("1 - Abastecer por Valor");
         System.out.println("2 - Abastecer por Litro");
@@ -79,7 +93,6 @@ public class Main {
             }
 
         }
-
 
     }
 }
